@@ -11,19 +11,24 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent,
           title: Text(
-        'About Booker',
-        style: TextStyle(fontSize: 25),
-      )),
+            'About Booker',
+            style: TextStyle(fontSize: 25),
+          )),
       body: Center(
         child: Column(
           children: [
             Text(
-              'Developed by Michael Fang',
-              style: TextStyle(fontSize: 23),
+              'Developed by Michael Fang\n          From Omniscient',
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
             Text('Copyright of Michael Fang, 2021',
-                style: TextStyle(fontSize: 23)),
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
+            Text('Source Code:',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
+            Text('https://github.com/Us3r4gent/booker',
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold))
           ],
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         ),

@@ -9,12 +9,12 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.orange,
         child: Center(
-          child: Text(
-            'LibraryPage',
-            style: TextStyle(fontSize: 30, color: Colors.white),
-          ),
-        ));
+      child: Text(
+        'Library Page\nStill Developing...',
+        style: TextStyle(
+            fontSize: 30, color: Colors.black, fontFamily: 'ZCOOLXiaoWei'),
+      ),
+    ));
   }
 }

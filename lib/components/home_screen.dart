@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:booker/books/charlotteweb.dart';
 import '../books/graveyardbook.dart';
 
+int subscribed = 0;
+
+final subscribesnackbar = SnackBar(
+  content: Text(
+    'Please subscribe first!',
+    style: TextStyle(fontSize: 20),
+  ),
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.deepPurpleAccent,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+);
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -40,8 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => CharlotteWeb()));
+                  print(subscribed);
+                  if (subscribed == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CharlotteWeb()));
+                  } else if (subscribed == 0)
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(subscribesnackbar);
                 },
                 child: Container(
                   child: ClipRRect(
@@ -66,8 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => GraveyardBook()));
+                  print(subscribed);
+                  if (subscribed == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => GraveyardBook()));
+                  } else if (subscribed == 0)
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(subscribesnackbar);
                 },
                 child: Container(
                   child: ClipRRect(
@@ -111,50 +133,52 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: 'ZCOOLXiaoWei'),
             ),
           ),
-          Container(
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 0, top: 15),
-                      child: Text(
-                        'Tangerine',
-                        style:
-                            TextStyle(fontSize: 25, fontFamily: 'ZCOOLXiaoWei'),
-                      ),
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(
-                          left: 25,
-                        ),
+          Center(
+            child: Container(
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 0, top: 15),
                         child: Text(
-                          '\nBut I can see.\nI can see everything.',
-                        ))
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 74.6),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image(
-                        image: AssetImage('assets/tangerine.jpg'),
-                      )),
-                )
-              ],
+                          'Tangerine',
+                          style: TextStyle(
+                              fontSize: 25, fontFamily: 'ZCOOLXiaoWei'),
+                        ),
+                      ),
+                      Container(
+                          padding: EdgeInsets.only(
+                            left: 25,
+                          ),
+                          child: Text(
+                            '\nBut I can see.\nI can see everything.',
+                          ))
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 74.6),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: Image(
+                          image: AssetImage('assets/tangerine.jpg'),
+                        )),
+                  )
+                ],
+              ),
+              margin: EdgeInsets.only(top: 25),
+              height: 110,
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(10, 10),
+                        blurRadius: 33,
+                        color: Color(0xFF919191).withOpacity(.84))
+                  ]),
             ),
-            margin: EdgeInsets.only(left: 45, top: 25),
-            height: 110,
-            width: 300,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(10, 10),
-                      blurRadius: 33,
-                      color: Color(0xFF919191).withOpacity(.84))
-                ]),
           ),
           SizedBox(
             height: 10,
@@ -175,26 +199,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: 'ZCOOLXiaoWei'),
             ),
           ),
-          Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Image(
-                image: AssetImage('assets/audiobook.jpg'),
-              ),
-            ),
-            margin: EdgeInsets.only(top: 20, left: 45, right: 45, bottom: 30),
-            height: 189.5,
-            width: 400,
-            decoration: BoxDecoration(
-                color: Colors.white,
+          Center(
+            child: Container(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(10, 10),
-                      blurRadius: 33,
-                      color: Color(0xFF919191).withOpacity(.84))
-                ]),
-          )
+                child: Image(
+                  image: AssetImage('assets/audiobook.jpg'),
+                ),
+              ),
+              margin: EdgeInsets.only(top: 20, bottom: 30),
+              height: 187,
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(10, 10),
+                        blurRadius: 33,
+                        color: Color(0xFF919191).withOpacity(.84))
+                  ]),
+            ),
+          ),
         ],
       )),
     );

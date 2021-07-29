@@ -1,5 +1,27 @@
 import 'package:flutter/material.dart';
 import '../pages.dart';
+import './home_screen.dart';
+import './profile_screen.dart';
+
+String payGroupValue = '';
+
+Function subscribeButtonState = null;
+
+final successsnackbar = SnackBar(
+  content: Text(
+    'Successfully subscribed!',
+    style: TextStyle(fontSize: 20),
+  ),
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.deepPurpleAccent,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+);
+
+Function subscirbeButtonAction = () {
+  subscribed = 1;
+  subscribeText = '  Subscription: Yes';
+  ScaffoldMessenger.of(_SubPageState().context).showSnackBar(successsnackbar);
+};
 
 class SubPage extends StatefulWidget {
   @override
@@ -7,6 +29,8 @@ class SubPage extends StatefulWidget {
 }
 
 class _SubPageState extends State<SubPage> {
+  bool ischecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +84,9 @@ class _SubPageState extends State<SubPage> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(
+                        top: 30,
+                      ),
                       child: Text(
                         'Year',
                         style: TextStyle(fontSize: 30, color: Colors.white),
@@ -87,7 +113,7 @@ class _SubPageState extends State<SubPage> {
                   color: Colors.deepPurpleAccent,
                 ),
                 height: 230,
-                width: 110,
+                width: 100,
               ),
               Container(
                 child: Column(
@@ -120,7 +146,7 @@ class _SubPageState extends State<SubPage> {
                   color: Colors.deepPurpleAccent[100],
                 ),
                 height: 230,
-                width: 110,
+                width: 100,
               ),
               Container(
                 child: Column(
@@ -153,51 +179,79 @@ class _SubPageState extends State<SubPage> {
                   color: Colors.purpleAccent[100],
                 ),
                 height: 230,
-                width: 110,
+                width: 100,
               )
             ],
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 40, top: 40),
+                    padding: EdgeInsets.only(left: 40, top: 30),
                     child: Text(
-                      'WeChat Pay',
+                      'Free (Only for BS)',
                       style: TextStyle(fontSize: 25),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 40, left: 10),
-                    child: Icon(
-                      Icons.check_box_rounded,
-                      color: Colors.deepPurpleAccent,
-                      size: 25,
-                    ),
+                    padding: EdgeInsets.only(left: 10, top: 30),
+                    child: Radio(
+                        value: 'Free',
+                        groupValue: payGroupValue,
+                        onChanged: (value) {
+                          subscribeButtonState = () {
+                            subscribed = 1;
+                          };
+                          payGroupValue = value;
+                          setState(() {});
+                        }),
                   )
                 ],
               ),
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 40, top: 40),
-                    child: Text(
-                      'AliPay',
-                      style: TextStyle(fontSize: 25),
+              Container(
+                padding: EdgeInsets.only(top: 0),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 40, top: 15),
+                      child: Text(
+                        'WeChat Pay',
+                        style: TextStyle(fontSize: 25),
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 40, left: 10),
-                    child: Icon(
-                      Icons.check_box_outline_blank_rounded,
-                      color: Colors.deepPurpleAccent,
-                      size: 25,
-                    ),
-                  )
-                ],
+                    Container(
+                      padding: EdgeInsets.only(left: 10, top: 15),
+                      child: Radio(
+                          value: 'WeChatPay',
+                          groupValue: payGroupValue,
+                          onChanged: (value) {
+                            subscribeButtonState = null;
+                            payGroupValue = value;
+                            setState(() {});
+                          }),
+                    )
+                  ],
+                ),
               )
             ],
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 25.9),
+            child: SizedBox(
+              height: 50,
+              width: 350,
+              child: ElevatedButton(
+                onPressed: subscribeButtonState,
+                child: Text(
+                  'Subscribe',
+                  style: TextStyle(fontSize: 23),
+                ),
+                style:
+                    ElevatedButton.styleFrom(primary: Colors.deepPurpleAccent),
+              ),
+            ),
           )
         ],
       ),

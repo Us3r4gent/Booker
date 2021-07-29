@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../pages.dart';
 import 'subscription_screen.dart';
 
+String subscribeText = '  Subscription';
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -76,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.deepPurpleAccent,
                         ),
                         Text(
-                          '  Subscription: Yes',
+                          subscribeText,
                           style:
                               TextStyle(fontSize: 20, color: Color(0xFF616161)),
                         ),
